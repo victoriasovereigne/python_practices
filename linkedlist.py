@@ -1,15 +1,13 @@
-class Node:
-	def __init__(self, data=None):
-		self.data = data
-		self.next = None
-
-	def __str__(self):
-		return self.data
+from node import Node
 
 class LinkedList:
-	def __init__(self):
+	def __init__(self, array=None):
 		self.first = None
 		self.last = None
+
+		if array is not None and len(array) > 0:
+			for c in array:
+				self.insert(c)
 
 	def insert(self, n):
 		node = Node(n)
@@ -19,6 +17,18 @@ class LinkedList:
 		else:
 			self.last.next = node
 			self.last = self.last.next
+
+	def append(self, node):
+		if self.first is None:
+			print(node)
+			self.first = node
+			current = node
+
+			while current.next is not None:
+				current = current.next
+			self.last = current
+		else:
+			self.last.next = node
 
 	def __str__(self):
 		if self.first is not None:
@@ -32,14 +42,3 @@ class LinkedList:
 
 		else:
 			return '[]'
-
-L = LinkedList()
-
-L.insert(1)
-L.insert(2)
-L.insert(1)
-L.insert(3)
-L.insert(1)
-L.insert(2)
-
-print(L)
